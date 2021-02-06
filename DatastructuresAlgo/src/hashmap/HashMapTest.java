@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 public class HashMapTest {
 	
+	private static final int dataSet = 5000;
+
 	@Test
 	public void should_insert_and_retrieve_value() {
 		
@@ -14,6 +16,8 @@ public class HashMapTest {
 		sut.put("My First String",1);
 		
 		assertEquals(1, (int)sut.get("My First String"));
+		
+		assertEquals(1, sut.getSize());
 		
 	}
 	
@@ -34,7 +38,7 @@ public class HashMapTest {
 		sut.put("My Seventh String",7);	
 		assertEquals(7, sut.get("My Seventh String"));
 		
-		
+		assertEquals(4, sut.getSize());
 		
 	}
 	
@@ -74,19 +78,20 @@ public class HashMapTest {
 		
 		HashMap<Integer,Integer> sut = new HashMap<>();
 		
-		for(int i = 0;i < 5000; i++) {
+		for(int i = 0;i < dataSet; i++) {
 			sut.put(i, i+10);
 		}
 		
-		for(int i = 0;i < 5000; i++) {
+		for(int i = 0;i < dataSet; i++) {
 			assertEquals(i+10,sut.get(i));
 		}
 		
 		
-		for(int i = 0;i < 5000; i++) {
+		for(int i = 0;i < dataSet; i++) {
 			sut.remove(i);
-			assertEquals(null,sut.get(i));
+		    assertEquals(null,sut.get(i));
 		}
+		assertEquals(0, sut.getSize());
 		
 	}
 
